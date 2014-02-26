@@ -1,6 +1,6 @@
-.Data
-.Rhistory
-.Rproj
+*.Data
+*.Rhistory
+*Rproj
 .Rproj.user/
 docs/*.doc
 docs/latex/*.aux
