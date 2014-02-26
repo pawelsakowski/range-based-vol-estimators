@@ -1,0 +1,264 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Plan prezentacji}
+
+\begin{enumerate}
+\item Efektywnoœæ estymatorów zmiennoœci
+\begin{itemize}
+\item klasyczny estymator zmiennoœci
+\item estymator Parkinsona (1980)
+\item estymator Osbanda (2007)
+\item estymator Garmana-Klassa (1980)
+\item estymator Rogersa-Satchella (1991)
+\end{itemize}
+\item Uwagi do referatu Tomka Skoczylasa
+\end{enumerate}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Za³o¿enia ogólne}
+\begin{itemize}
+\item logarytm ceny akcji podlega jednowymiarowemu ci¹g³emu b³¹dzeniu losowemu ze sta³¹ dyfuzji $D$ \pause
+\item a zatem, prawdopodobieñstwo tego, ¿e logarytm ceny $x$ znajdzie siê w przedziale $(x, x + dx)$ w momencie $t$, zak³adaj¹c jego pocz¹tkow¹ wartoœæ $x_0$ w momencie $t = 0$, wynosi:
+$$
+\Big(dx/\sqrt{2\pi Dt}\Big)\exp[-(x-x_0)^2/2Dt]
+$$ \pause
+\item porównuj¹c to z rozk³adem normalnym, zauwa¿amy, ¿e $D$ jest wariancj¹ zmiany logarytmu ceny $(x - x_0)$ w interwale jednostowym
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Klasyczny estymator zmiennoœci}
+Tradycyjny sposób estymacji wariancji $D$: \pause
+\begin{itemize}
+\item obserwujemy $x(t)$ w momentach $t = 0, 1, 2, 3, \dots, n$ \pause
+\item definiujemy $d_t$ jako zmiany w $t$-tym interwale: $d_t = x(t) - x(t-1)$, $t = 1, 2, 3, \dots, n$ \pause
+\item obliczamy wyra¿enie:
+$$
+D_x = \frac{1}{n-1} \sum_{t=1}^{n}(d_t - \bar{d})^2
+$$
+gdzie
+$$
+\bar{d} = \frac{1}{n} \sum_{m=1}^{n}d_m 
+$$ \pause
+\item dla niskiej liczby obserwacji estymator ten ma ma³¹ precyzjê! \pause
+%\item w wielu przypadkach $n=1$ 
+\begin{itemize}
+\item zmiennoœæ zrealizowana (Andersen \emph{et al.} 2001), 
+\item modele z rodziny GARCH (Engle 1982, Bollerslev 1986 i nastêpni)
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Symulacja Monte Carlo}
+\begin{itemize}
+\item œcie¿ka cen $x(t)$ sk³ada siê z $n = 10 000$ interwa³ów, $t = 1, 2, \dots, 10000$
+\item ci¹g³e stopy zwrotu maj¹ rozk³ad normalny:
+$$
+\log \big [x(t)\big] - \log \big [x(t-1) \big] \sim N(0, 0.001^2)
+$$
+\item liczba powtórzeñ symulacji = 10000 
+\end{itemize}
+\end{frame}
+
+\input{rw.tex}
+
+
+\begin{frame}
+\frametitle{Symulowany rozk³ad klasycznego estymatora zmiennoœci}
+\begin{center}
+\includegraphics[width = 1.1 \textwidth]{img/plot1}
+\end{center}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Estymator $D_l$ Parkinsona (1980)}
+\begin{itemize}
+\item zamiast mierzyæ $x(n)$ dla $n = 0, 1, 2, 3, \dots$ obserwujemy ró¿nicê $l$ miêdzy logarytmami maksymalnej i minimalnej ceny wewn¹trz danego interwa³u
+$$
+\hat{\sigma}^2_{P} = \frac{1}{4 \log 2}(\log H_t - \log L_t)^2
+$$
+gdzie $H_t$ i $L_t$ to odpowiednio ceny maksymalne i minimalne. \pause
+\item intuicja: taki zakres powinien byæ bardziej efektywnym pomiarem wariancji, w porównaniu ze zmian¹ ceny miêdzy dwoma arbitralnie wybranymi miejscami w czasie (tj. pocz¹tkiem i koñcem danego interwa³u).
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Estymator $D_l$ Parkinsona (1980)}
+\begin{itemize}
+\item Rozk³ad i w³asnoœci zakresu zmian $l$ s¹ znane. Zachodzi m. in.:
+$$
+E[l^p] = \frac{4}{\sqrt{\pi}}\Gamma\bigg(\frac{p+1}{2}\bigg)\bigg(1-\frac{4}{2^p}\bigg)\zeta(p-1)(2Dt)^{p/2}
+$$
+gdzie $p\geq $, a $\zeta(x)$ jest funkcj¹ zeta Riemanna.
+\item zaœ w szczególnoœci mamy:
+$$
+E[l] = \sqrt{8Dt/\pi}
+$$
+oraz
+$$
+E[l^2] = (4\log 2)Dt
+$$
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Estymator $D_l$ Parkinsona (1980)}
+\begin{itemize}
+\item dla interwa³u jednostkowego zachodzi tak¿e:
+$$
+D = 0.393 (E[l])^2 = 0.361 E[l^2]
+$$
+\item mamy zatem relacjê:
+$$
+E[l^2] = 1.09 (E[l])^2
+$$
+która jest wygodna przy testowaniu tego, czy obserwowane zakresy zmian $l$ pochodz¹ z procesu b³¹dzenia losowego
+\item w rezultacie, maj¹c zbiór zakresów zmian $(l_1, l_2, \cdots, l_n)$ obserwowanych w $n$ jednostkowych interwa³ach, estymatorem wariancji $D$ jest:
+$$
+D_l = \frac{0.361}{n}\sum_{i=1}^nl_i^2
+$$
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{porównanie estymatorów $D_x$ i $D_l$}
+\begin{itemize}
+\item wariancja estymatora $D_x$
+$$
+E[(D_x - D)^2] = \bigg[\frac{E(x^4)}{E(x^2)}-1\bigg]\frac{D^2}{N_x}=\frac{2D^2}{N_x}
+$$
+\item wariancja estymatora $D_l$
+$$
+E[(D_l - D)^2] = \bigg[\frac{E(l^4)}{E(l^2)}-1\bigg]\frac{D^2}{N_l}=\frac{0.41D^2}{N_l}
+$$
+\item A zatem, wariancje estymatorów zbli¿one jeœli zachodzi:
+$$
+N_x\approx 5N_l
+$$
+co oznacza, ¿e stosuj¹c $D_l$ zamiast $D_x$ mo¿emy zredukowaæ liczbê obserwacji o ok. \hl{80\%} zachowuj¹c tê sam¹ precyzjê estymatora!
+\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Symulowany rozk³ad estymatora Parkinsona (1980)}
+\begin{center}
+\includegraphics[width = 1.1 \textwidth]{img/plot2}
+\end{center}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Inne estymatory oparte na zakresie zmian}
+\begin{itemize}
+\item Estymator Osbanda (2007)
+\begin{eqnarray}
+\hat{\sigma}^2_{\mathrm{Osb}} &=& 0.84 (\log H_t - \log L_t) - \nonumber \\
+&& - 0.39 |\log C_t - \log O_t| \nonumber
+\end{eqnarray}
+gdzie $O_t$ i $C_t$ to odpowiednio ceny otwarcia i zamkniêcia w interwale $t$.\pause
+\item Estymator Garmana-Klassa (1980)
+\begin{eqnarray}
+\hat{\sigma}^2_{\mathrm{GK}} &=& 0.5[\log H_t - \log L_t]^2 - \nonumber \\
+&& - (2\log 2 - 1)[\log C_t - \log O_t]^2 \nonumber \pause
+\end{eqnarray}
+\item Estymator Rogersa \& Satchella (1991)
+\begin{eqnarray}
+\hat{\sigma}^2_{\mathrm{RS}} &=& 
+\log(H_t/O_t)[\log(H_t/O_t) - \log(C_t/O_t)] + \nonumber \\ 
+&& +
+\log(L_t/O_t)[\log(L_t/O_t) - \log(C_t/O_t)] \nonumber
+\end{eqnarray}
+\end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Symulowany rozk³ad estymatora Osbanda (2007)}
+\begin{center}
+\includegraphics[width = 1.1 \textwidth]{img/plot3}
+\end{center}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Symulowany rozk³ad estymatora Garmana-Klassa (1980)}
+\begin{center}
+\includegraphics[width = 1.1 \textwidth]{img/plot4}
+\end{center}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Symulowany rozk³ad estymatora Rogersa-Satchella (1991)}
+\begin{center}
+\includegraphics[width = 1.1 \textwidth]{img/plot5}
+\end{center}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Statystyki próbkowe estymatorów zmiennoœci}
+prawdziwa wartoœæ $\sigma^2 = 1.0\times 10^{-6}$\\
+\quad \\
+
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+ & œrednia        & odch. std. & odch. std.     & redukcja\\ 
+ & $\times 10^{6}$ & $\times 10^{6}$  & do klasycznego & obs.    \\ 
+\hline  
+klasyczny           & 1.02 & 1.44  & - & -         \\ 
+Parkinson           & 0.99 & 0.65 & 45\%  & 79.8\%    \\ 
+Osband              & 1.11 & 0.57 & 40\%  & 84.2\%    \\ 
+Garman-Klass        & 0.99 & 0.52 & 37\%  & 87.9\%    \\ 
+Rogers-Satchell     & 0.99 & 0.57 & 40\%  & 84.2\%    \\ 
+\hline
+\end{tabular} 
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Uwagi do referatu Tomka Skoczylasa}
+\begin{itemize}
+\item Czy model RHARCH mo¿e byæ szacowany za pomoc¹ powszechnie dostêpnych pakietów statystycznych? 
+\item Czy MSE prognoz ró¿ni¹ siê istotnie od siebie? \\
+Warto rozwa¿yæ raportowanie odch. std. miar MSE.
+\item Jak zdefiniowana jest miara QLIKE?
+\item B³êdy w oznaczeniach w równaniach?\\
+Model RGARCH(1,1)
+\begin{columns} 
+\begin{column}[c]{4cm} 
+\begin{eqnarray}
+r_t &=& \mu + \varepsilon_t \nonumber \\
+\varepsilon_t &\sim& N\Big(0,\frac{1}{4\log2}\lambda_t^2\Big) \nonumber \\
+\lambda_t &=& \omega + \alpha R_{t-1} + \beta\lambda_{t-1} \nonumber \\
+R_{t-1} &=& \log(H_{t-1}/L_{t-1}) \overset{?}{=} \lambda_{t-1} \nonumber
+\end{eqnarray}
+\end{column} 
+\begin{column}[c]{4cm} 
+$$
+\sigma_{\mathrm{P}}^2 = \frac{1}{4 \log 2}\Big(\log(H_t/L_t)\Big)^2
+$$
+\end{column} 
+\end{columns} 
+\end{itemize}
+\end{frame}

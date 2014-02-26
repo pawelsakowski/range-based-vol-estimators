@@ -1,0 +1,90 @@
+\documentclass[
+polish,
+xcolor={svgnames,pdftex,table},
+mathserif,
+11pt,
+hyperref={pdfpagelabels=false},
+%handout,
+presentation,
+]{beamer}
+% ponizej opcja, zeby pdflatex honorowal grafike w PDFach w wersji 1.5
+%\pdfminorversion=6 
+
+
+
+
+\input{style.tex}
+
+
+%\title[VTS]{Range Volatility Models\\ and Their Applications in Finance}
+\title[Estymatory zmiennoœci]{Efektywnoœæ estymatorów zmiennoœci \\opartych na zakresie zmian}
+%\subtitle{}
+
+\author[]{Pawe³ Sakowski \\ \quad \\ \tiny Korefereat do wyst¹pienia T. Skoczylasa ,,Modelowanie wariancji finansowych szeregów czasowych przy u¿yciu Range-based ARCH uwzglêdniaj¹cego heterogenicznoœæ wariancji''}
+
+\institute[WNE UW]{
+ % Wydzia³ Nauk Ekonomicznych\\
+ % Uniwersytetu Warszawskiego\
+}  
+\date{}
+\titlegraphic{\includegraphics[width=8cm]{img/wne.pdf}}  
+\date{\footnotesize Konferencja WNE UW \\Kazimierz nad Wis³¹\\ 27-28/9/2013}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\selectlanguage{polish}
+\lstset{
+	language=R,
+	keywordstyle=\bfseries\ttfamily\color[rgb]{0,0,1},
+	identifierstyle=\ttfamily,
+	commentstyle=\color[rgb]{0.133,0.545,0.133},
+	stringstyle=\ttfamily\color[rgb]{0.627,0.126,0.941},
+	showstringspaces=false,
+	basicstyle=\small,
+	numberstyle=\footnotesize,
+	numbers=none, %=left
+	stepnumber=1,
+	numbersep=10pt,
+	tabsize=2,
+	breaklines=true,
+	prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+	breakatwhitespace=false,
+	aboveskip={1.5\baselineskip},
+  columns=fixed,
+  upquote=true,
+  extendedchars=true,
+% frame=single,
+% backgroundcolor=\color{lbcolor},
+}
+
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+%\begin{frame}%[allowframebreaks]
+%{Plan prezentacji}
+%  \tableofcontents
+%\end{frame}
+
+\input{Kazimierz2013.tex}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{}
+	\begin{block}{\begin{center}\huge Dziêkujê!\end{center}}
+\begin{center}
+\vspace{2mm}
+Pawe³ Sakowski\\
+\texttt{sakowski@wne.uw.edu.pl}\\
+\end{center}
+	\end{block}
+\end{frame}
+
+\end{document}
+

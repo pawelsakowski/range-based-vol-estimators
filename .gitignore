@@ -1,0 +1,15 @@
+.Data
+.Rhistory
+.Rproj
+.Rproj.user/
+docs/*.doc
+docs/latex/*.aux
+docs/latex/*.log
+docs/latex/*.nav
+docs/latex/*.out
+docs/latex/*.snm
+docs/latex/*.toc
+docs/latex/*.vrb
+docs/latex/*.gz
+
+
